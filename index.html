@@ -239,12 +239,16 @@
         }
 
         /* Solutions Section */
-        .solutions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-        }
+        .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+}
 
         .solution-card {
             background: linear-gradient(135deg, var(--white) 0%, #f0f8ff 100%);
