@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Alio Robotics - Projekt Herzensbrücke</title>
+    <meta name="description" content="Alio Robotics - KI-basierte Begleiter für Selbstständigkeit und Lebensqualität. Entdecken Sie NAVIUS, LUMA und ORA.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2C5F8B;
+            --secondary: #F4A460;
+            --accent: #8FBC8F;
+            --text: #333;
+            --light-bg: #F9F9F9;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1.1em;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, #4A7BA7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--secondary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .floating-robot {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .floating-robot:nth-child(2) { top: 20%; left: 10%; animation-delay: 1s; }
+        .floating-robot:nth-child(3) { top: 60%; right: 10%; animation-delay: 2s; }
+        .floating-robot:nth-child(4) { bottom: 20%; left: 20%; animation-delay: 3s; }
+
+        /* Section Styles */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        /* Problem Section */
+        .problems {
+            background: var(--light-bg);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .problem-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .problem-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .problem-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Solutions Section */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .solution-card {
+            background: linear-gradient(135deg, var(--white) 0%, #f0f8ff 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .solution-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .solution-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .solution-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            color: var(--white);
+            border-radius: 50%;
+            line-height: 50px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .solution-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .solution-features {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .solution-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .solution-features li:before {
+            content: '✓ ';
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Product Stages */
+        .stages {
+            background: var(--light-bg);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 40px;
+            width: 45%;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+            transition: var(--transition);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            top: 50px;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -60px;
+        }
+
+        .timeline-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .stage-title {
+            color: var(--primary);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .stage-price {
+            color: var(--secondary);
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Creativity Methods */
+        .creativity-method {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        .creativity-method:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .method-number {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            line-height: 60px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Research Section */
+        .research-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Implementation Plan */
+        .implementation {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        }
+
+        .phase-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .phase-box {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phase-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .phase-box:hover::after {
+            transform: scaleX(1);
+        }
+
+        .phase-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .phase-number {
+            font-size: 3em;
+            color: var(--secondary);
+            font-weight: bold;
+            opacity: 0.3;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .phase-title {
+            color: var(--primary);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        /* Results Section */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .result-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .result-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .result-number {
+            font-size: 3em;
+            color: var(--secondary);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            animation: countUp 2s ease;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .contact h2 {
+            color: var(--white);
+            margin-bottom: 30px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 15px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+
+        .submit-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: var(--white);
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item::before {
+                left: 10px !important;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            margin: 5px 0;
+            transition: var(--transition);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow);
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Alio</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#problem">Herausforderung</a></li>
+                <li><a href="#solutions">Lösungen</a></li>
+                <li><a href="#stages">Produkte</a></li>
+                <li><a href="#kreativitaet">Kreativitätstechniken</a></li>
+                <li><a href="#forschung">Forschung</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+            <button class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-robot"></div>
+        <div class="floating-robot"></div>
+        <div class="floating-robot"></div>
+        <div class="hero-content">
+            <div style="max-width: 200px; margin: 0 auto 30px;">
+                <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="200" fill="#f5ebe0" rx="20"/>
+                    <text x="100" y="70" text-anchor="middle" fill="#2C5F8B" font-size="48" font-weight="bold" font-family="Arial, sans-serif">ALIO</text>
+                    <circle cx="70" cy="120" r="8" fill="#2C5F8B"/>
+                    <circle cx="130" cy="120" r="8" fill="#2C5F8B"/>
+                    <path d="M 60 150 Q 100 170 140 150" stroke="#2C5F8B" stroke-width="3" fill="none"/>
+                    <path d="M 80 140 L 90 145 L 100 140 L 110 145 L 120 140" stroke="#F4A460" stroke-width="4" fill="none"/>
+                </svg>
+            </div>
+            <h1>Projekt "Herzensbrücke"</h1>
+            <h2 style="font-size: 2em; margin-bottom: 20px; font-weight: normal;">Roboter, die Menschen begeistern</h2>
+            <p>KI-basierte Begleiter für Selbstständigkeit und Lebensqualität</p>
+            <a href="#solutions" class="cta-button">Entdecken Sie unsere Lösungen</a>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problems" id="problem">
+        <h2 class="section-title">Die Herausforderung verstehen</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 30px; font-size: 1.2em; font-weight: bold;">
+            Seniorinnen und Senioren ab 65 Jahren bilden eine sehr heterogene Zielgruppe
+        </p>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 50px; font-size: 1.1em;">
+            Manche sind technikaffin und geistig fit, andere haben Vorbehalte oder kognitive Einschränkungen. 
+            Die Herausforderungen liegen einerseits in körperlichen und sensorischen Aspekten (z. B. Hör- und Sehschwäche, 
+            verlangsamte Motorik), andererseits in emotionalen und sozialen Aspekten. Viele Ältere betrachten einen 
+            sozialen Assistenzroboter zunächst als technisches Hilfsmittel und weniger als soziale Entität. 
+            Dementsprechend erwarten sie, dass so ein Gerät vor allem praktischen Nutzen bringt und einfach zu bedienen ist.
+        </p>
+        <div class="problem-grid">
+            <div class="problem-card fade-in">
+                <div class="problem-icon">😟</div>
+                <h3>Angst vor Isolation</h3>
+                <p>Ein zentrales Akzeptanzhindernis ist die Sorge, menschliche Nähe könne durch Roboter ersetzt werden. 
+                Hier gilt es klarzumachen, dass der Roboter lediglich ergänzt und unterstützt, aber nicht menschliche 
+                Zuwendung verdrängt. Der Roboter muss als ergänzender Helfer eingeführt werden, der Autonomie und 
+                soziale Teilhabe stärkt.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">🔒</div>
+                <h3>Wahrung von Würde & Autonomie</h3>
+                <p>Der Roboter darf Seniorinnen und Senioren nicht bevormunden oder ausspionieren, sondern sollte 
+                ihre Selbstständigkeit fördern und respektvoll agieren. Die Wahrung von Würde, Autonomie und 
+                Privatsphäre ist essentiell. Ethik by Design bedeutet: Der Roboter muss transparent als Hilfsmittel 
+                erkennbar bleiben, das aber mit Herz bei der Sache ist.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">👁️</div>
+                <h3>Sensorische Einschränkungen</h3>
+                <p>Viele Seniorinnen und Senioren hören nicht mehr gut oder sprechen mit Akzent. Die Spracherkennung 
+                muss robust sein und der Roboter langsam, deutlich und in passender Lautstärke sprechen. Bei 
+                Sehschwäche sind große, klare Symbole und Displays wichtig. Die verlangsamte Motorik erfordert 
+                geduldige Interaktionszeiten.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">🎭</div>
+                <h3>Emotionale Vorbehalte</h3>
+                <p>Viele ältere Menschen haben emotionale Vorbehalte, geprägt durch kulturelle Eindrücke – z. B. 
+                Skepsis gegenüber „künstlichen" Helfern, verstärkt durch dystopische Filmbilder. Gleichzeitig 
+                zeigen Pilotprojekte positive Überraschungen: In Workshops reagierten Teilnehmende teils äußerst 
+                aufgeschlossen und entwickelten fast fürsorgliche Gefühle.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">🛠️</div>
+                <h3>Praktische Nutzenerwartungen</h3>
+                <p>Ältere Menschen neigen dazu, soziale Roboter primär als Assistenzgeräte zu sehen. Sie nennen 
+                in Befragungen oft konkrete, alltägliche Wünsche: dass der Roboter auf Zuruf das Fernsehprogramm 
+                heraussucht, an Trinken oder Termine erinnert, oder einfache Haushaltstätigkeiten übernimmt. 
+                Solche banalen, aber nützlichen Funktionen sind oft der Einstiegspunkt.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">🤖</div>
+                <h3>Das Unheimliche Tal vermeiden</h3>
+                <p>Ein humanoides Erscheinungsbild kann vorteilhaft sein, muss aber das „Uncanny Valley" vermeiden – 
+                Alternativen wie tierähnliche oder abstrakt-sympathische Formen werden teils besser akzeptiert. 
+                Ältere Nutzerinnen und Nutzer bevorzugen oft ein freundliches, „niedliches" Design des Roboters, 
+                das keine Angst auslöst.</p>
+            </div>
+        </div>
+        <div style="margin-top: 50px; padding: 30px; background: #f0f8ff; border-radius: 15px;">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">Akzeptanzfaktoren nach wissenschaftlichen Studien</h3>
+            <p style="font-size: 1.1em; line-height: 1.8;">
+                Akzeptanzfaktoren wie <strong>wahrgenommene Nützlichkeit</strong>, <strong>Freude</strong> und 
+                <strong>Vertrauenswürdigkeit</strong> wurden in Studien als wichtig identifiziert – ältere Nutzerinnen 
+                und Nutzer müssen also den Mehrwert klar erkennen und dem Roboter vertrauen können, um gern mit ihm 
+                zu interagieren. Zudem haben viele ältere Menschen Befürchtungen: Manche Seniorinnen dachten, der 
+                Roboter könne bereits jetzt für sie abwaschen oder bügeln. Hier gilt es, Erwartungen zu managen und 
+                den Nutzen deutlich zu machen, den aktuelle Robotermodelle schon heute bieten.
+            </p>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions">
+        <h2 class="section-title">Unsere innovativen Lösungsansätze</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 50px; font-size: 1.1em;">
+            Basierend auf den identifizierten Herausforderungen und den Ergebnissen unserer Kreativitätstechniken 
+            haben wir neun konkrete Lösungskonzepte entwickelt. Diese Ansätze zielen darauf ab, die emotionalen, 
+            praktischen und sozialen Bedürfnisse älterer Menschen zu erfüllen und gleichzeitig Vertrauen und 
+            Freude im Umgang mit Robotertechnologie zu schaffen.
+        </p>
+        <div class="solutions-grid">
+            <div class="solution-card fade-in">
+                <span class="solution-number">1</span>
+                <h3>Vertrauens-Zyklus-System</h3>
+                <p style="margin-bottom: 20px;">
+                    Langfristige Begleitung und kontinuierlicher Vertrauensaufbau durch regelmäßige Interaktion 
+                    und transparente Kommunikation. Der Roboter wächst mit den Bedürfnissen mit.
+                </p>
+                <ul class="solution-features">
+                    <li>Regelmäßige Check-ins durch Partnerorganisationen</li>
+                    <li>Monatliche Hausbesuche zur Anpassung</li>
+                    <li>Kontinuierliche Weiterentwicklung der Features</li>
+                    <li>Feedback-Integration in Echtzeit</li>
+                    <li>Persönliche Erfolgsgeschichten dokumentieren</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <span class="solution-number">2</span>
+                <h3>Ethik-Guardian-Modul</h3>
+                <p style="margin-bottom: 20px;">
+                    Umfassende Ethik- und Missbrauchsprävention durch mehrschichtige Sicherheitssysteme 
+                    und transparente Kontrollfunktionen für Nutzer und Angehörige.
+                </p>
+                <ul class="solution-features">
+                    <li>Familien-Kontrollpanel für Funktionsfreigaben</li>
+                    <li>Transparenzmodus mit automatischen Erklärungen</li>
+                    <li>Wöchentliche Ethik-Check-Dialoge</li>
+                    <li>Datenschutz-Dashboard in einfacher Sprache</li>
+                    <li>Unabhängige Ethik-Audits</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <span class="solution-number">3</span>
+                <h3>Alio Easy Touch & Voice</h3>
+                <p style="margin-bottom: 20px;">
+                    Barrierefreie Interaktion für Menschen mit starken Einschränkungen durch multiple 
+                    Eingabemöglichkeiten und proaktive Unterstützung.
+                </p>
+                <ul class="solution-features">
+                    <li>Große physische Tasten mit Symbolen</li>
+                    <li>Augensteuerung und Kopfbewegungserkennung</li>
+                    <li>Begleitmodus mit proaktiven Vorschlägen</li>
+                    <li>Anpassbare Reaktionsgeschwindigkeit</li>
+                    <li>Mehrsprachige Sprachausgabe</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <span class="solution-number">4</span>
+                <h3>Fair & Klar Finanzmodell</h3>
+                <p style="margin-bottom: 20px;">
+                    Transparente und faire Preisgestaltung ohne versteckte Kosten. Automatische Prüfung 
+                    von Fördermöglichkeiten und flexible Zahlungsoptionen.
+                </p>
+                <ul class="solution-features">
+                    <li>Transparente Monatsabos ohne Kleingedrucktes</li>
+                    <li>Automatischer Förder-Kompass</li>
+                    <li>Testmonat mit Vertrauensgarantie</li>
+                    <li>Kostenlose Rückgabe ohne Fragen</li>
+                    <li>Ratenzahlung ohne Aufpreis</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <span class="solution-number">5</span>
+                <h3>Mein-Alio-Einrichtung</h3>
+                <p style="margin-bottom: 20px;">
+                    Individuelle Anpassbarkeit leicht zugänglich gemacht durch intelligente Assistenten 
+                    und schrittweise Personalisierung nach den Wünschen der Nutzer.
+                </p>
+                <ul class="solution-features">
+                    <li>Start-Assistent mit einfachen Fragen</li>
+                    <li>Schritt-für-Schritt-Funktionsfreischaltung</li>
+                    <li>Digitales Wünschebuch für neue Ideen</li>
+                    <li>Automatische Personalisierung</li>
+                    <li>Anpassung durch Sprachbefehle</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <span class="solution-number">6</span>
+                <h3>Lokale Vertrauensbrücken</h3>
+                <p style="margin-bottom: 20px;">
+                    Aufbau von Vertrauen durch lokale Partner wie Kirchengemeinden, Seniorenheime 
+                    und bekannte Organisationen als erste Anlaufstellen.
+                </p>
+                <ul class="solution-features">
+                    <li>Kooperationen mit Kirchengemeinden</li>
+                    <li>Präsenz in Seniorenzentren</li>
+                    <li>Lokale Botschafter-Programme</li>
+                    <li>Vertraute Gesichter bei Einführung</li>
+                    <li>Regionale Dialekte und Bräuche</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <span class="solution-number">7</span>
+                <h3>Pilot-Partner-Programm</h3>
+                <p style="margin-bottom: 20px;">
+                    Wissenschaftlich begleitete Testphasen in Kooperation mit regionalen Einrichtungen 
+                    ermöglichen praxisnahe Evaluation und kontinuierliche Verbesserung.
+                </p>
+                <ul class="solution-features">
+                    <li>10-Wochen-Testphasen mit Alio</li>
+                    <li>Messbare Kennzahlen zur Lebensqualität</li>
+                    <li>Peer-Testimonial-Videos statt Werbung</li>
+                    <li>Wissenschaftliche Begleitung</li>
+                    <li>Öffentliche Ergebnisberichte</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <span class="solution-number">8</span>
+                <h3>Warme Sprache & Design</h3>
+                <p style="margin-bottom: 20px;">
+                    Emotionale Ansprache durch warme, persönliche Kommunikation und wohnliches Design, 
+                    das sich nahtlos in die häusliche Umgebung einfügt.
+                </p>
+                <ul class="solution-features">
+                    <li>Personalisierte Begrüßung mit Vornamen</li>
+                    <li>Humorvolle, empathische Dialoge</li>
+                    <li>Holzoptik und weiche Farben</li>
+                    <li>Lieblingsmusik aus der Jugendzeit</li>
+                    <li>Geschichten und Witze teilen</li>
+                </ul>
+            </div>
+            <div class="solution-card fade-in">
+                <span class="solution-number">9</span>
+                <h3>Mobilitäts-Revolution</h3>
+                <p style="margin-bottom: 20px;">
+                    Mit Alio Mobility bieten wir als einziger Anbieter einen Roboter, der volle Mobilität 
+                    ermöglicht - inklusive Treppensteigen und intelligenter Sturzprävention.
+                </p>
+                <ul class="solution-features">
+                    <li>Rollator-Funktion mit KI-Unterstützung</li>
+                    <li>Gemeinsames Treppensteigen möglich</li>
+                    <li>Adaptive Geschwindigkeitsanpassung</li>
+                    <li>Proaktive Gleichgewichtsstabilisierung</li>
+                    <li>Outdoor-Navigation mit Hinderniserkennung</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Stages -->
+    <section class="stages" id="stages">
+        <h2 class="section-title">Die Alio-Produktfamilie</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 50px; font-size: 1.1em;">
+            Von der emotionalen Begleitung bis zur vollständigen Mobilitätsunterstützung - unsere Roboter 
+            passen sich den individuellen Bedürfnissen an und wachsen mit den Anforderungen mit.
+        </p>
+        
+        <div style="margin-bottom: 60px; padding: 40px; background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%); border-radius: 20px;">
+            <h3 style="text-align: center; color: var(--primary); font-size: 2em; margin-bottom: 30px;">
+                🌟 NEU: NAVIUS - Der revolutionäre Mobilitätsroboter
+            </h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                <div>
+                    <h4 style="color: var(--primary); font-size: 1.5em; margin-bottom: 20px;">
+                        Volle Mobilität und Sicherheit vereint
+                    </h4>
+                    <p style="font-size: 1.1em; line-height: 1.8; margin-bottom: 20px;">
+                        NAVIUS ist mehr als ein Roboter - er ist ein intelligenter Mobilitätspartner, 
+                        der wie ein hochmoderner Rollator funktioniert und dabei revolutionäre Fähigkeiten bietet:
+                    </p>
+                    <ul style="font-size: 1.1em; line-height: 1.8;">
+                        <li><strong>Treppensteigen gemeistert:</strong> Als einziger Roboter seiner Art kann NAVIUS 
+                        gemeinsam mit der nutzenden Person Treppen überwinden - sicher und stabil</li>
+                        <li><strong>Intelligente Sturzprävention:</strong> Sensoren erkennen Gleichgewichtsprobleme 
+                        und stabilisieren proaktiv</li>
+                        <li><strong>Adaptive Geschwindigkeit:</strong> Passt sich automatisch dem Gehtempo an</li>
+                        <li><strong>Notfallassistenz:</strong> Bei Stürzen wird sofort Hilfe gerufen</li>
+                        <li><strong>Navigationsunterstützung:</strong> Führt sicher durch unbekannte Umgebungen</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-size: 1.2em; color: var(--secondary); font-weight: bold;">
+                        Preis: Ab 249€/Monat oder 7.999€ Kauf
+                    </p>
+                </div>
+                <div style="text-align: center;">
+                    <img src="https://i.ibb.co/C5VgWTCw/foto-2.jpg" alt="NAVIUS mit Seniorin" style="max-width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                    <p style="margin-top: 20px; font-style: italic; color: #666;">
+                        NAVIUS - Ihr zuverlässiger Partner für sichere Mobilität
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <h3 class="stage-title">NAVIUS</h3>
+                <p class="stage-price">49€/Monat oder 1.499€ Kauf</p>
+                <p><strong>Rollator-basierter KI-Roboter für Mobilität und Alltag</strong></p>
+                <ul>
+                    <li>Kombination aus „Navigieren" und „Assistenz"</li>
+                    <li>Speziell für ältere Menschen & Menschen mit Bewegungseinschränkungen</li>
+                    <li>Sichere Mobilitätsunterstützung</li>
+                    <li>Integrierte KI-Assistenz</li>
+                    <li>Sturzprävention und Notfallhilfe</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in">
+                <h3 class="stage-title">LUMA</h3>
+                <p class="stage-price">79€/Monat oder 2.499€ Kauf</p>
+                <p><strong>Humanoide Variante mit Fokus auf Gespräch & mentale Gesundheit</strong></p>
+                <ul>
+                    <li>Name: Mischung aus „Lumen" (Licht) und „human"</li>
+                    <li>Für Menschen mit Einsamkeit, Männer in Krisen, psychische Gesundheit</li>
+                    <li>Empathische Gesprächsführung</li>
+                    <li>Emotionale Unterstützung</li>
+                    <li>Krisenerkennung und -intervention</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in">
+                <h3 class="stage-title">ORA</h3>
+                <p class="stage-price">119€/Monat oder 3.999€ Kauf</p>
+                <p><strong>Kompakte Tisch-/Haushaltsvariante mit starker KI-Stimme</strong></p>
+                <ul>
+                    <li>Name: Latein für „sprich!" – auch spirituell (Aura, Ora et labora)</li>
+                    <li>Breite Zielgruppe, ideal für präventive Nutzung & Bildung</li>
+                    <li>Sprachbasierte Interaktion</li>
+                    <li>Wissensvermittlung und Bildung</li>
+                    <li>Haushaltssteuerung und -organisation</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in" style="background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%); border: 2px solid var(--secondary);">
+                <h3 class="stage-title" style="color: var(--secondary);">Alio Mobility</h3>
+                <p class="stage-price">249€/Monat oder 7.999€ Kauf</p>
+                <p><strong>Revolutionäre Mobilität: Freiheit neu definiert</strong></p>
+                <ul>
+                    <li>Rollator-Funktion mit Treppensteig-Technologie</li>
+                    <li>Intelligente Sturzerkennung und -prävention</li>
+                    <li>GPS-Navigation für sichere Wege</li>
+                    <li>Kraftunterstützung beim Gehen und Aufstehen</li>
+                    <li>Alle Features von Alio Life inklusive</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px; text-align: center; padding: 40px; background: #f0f8ff; border-radius: 15px;">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">Flexibles Upgrade-System</h3>
+            <p style="font-size: 1.1em; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+                Beginnen Sie mit dem für Sie passenden Modell und erweitern Sie bei Bedarf. 
+                Alle Alio-Roboter können durch Software-Updates neue Funktionen erlernen. 
+                Der Wechsel zu einem höheren Modell ist jederzeit möglich - wir rechnen bereits 
+                gezahlte Beträge fair an.
+            </p>
+        </div>
+    </section>
+
+    <!-- Product Gallery Section -->
+    <section style="padding: 80px 20px; background: var(--light-bg);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title">Unsere Alio-Roboterfamilie im Überblick</h2>
+            <p style="text-align: center; max-width: 900px; margin: 0 auto 50px; font-size: 1.1em;">
+                Entdecken Sie unsere verschiedenen Robotermodelle - vom kuscheligen Begleiter bis zum 
+                revolutionären Mobilitätsassistenten. Jeder Alio-Roboter wurde mit Liebe zum Detail 
+                entwickelt, um das Leben älterer Menschen zu bereichern.
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                <div style="text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: var(--shadow);">
+                    <img src="https://i.ibb.co/Qjbndmtn/foto-1.jpg" alt="NAVIUS" style="max-width: 100%; height: 250px; object-fit: contain; margin-bottom: 20px;">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">NAVIUS</h3>
+                    <p style="font-size: 1.05em; line-height: 1.6;">
+                        Der perfekte Mobilitätspartner: Kombiniert die Sicherheit eines Rollators mit 
+                        intelligenter KI-Unterstützung für maximale Selbstständigkeit im Alltag.
+                    </p>
+                </div>
+                
+                <div style="text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: var(--shadow);">
+                    <img src="https://i.ibb.co/5wf7rPD/foto-4.jpg" alt="LUMA" style="max-width: 100%; height: 250px; object-fit: contain; margin-bottom: 20px;">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">LUMA</h3>
+                    <p style="font-size: 1.05em; line-height: 1.6;">
+                        Ihr empathischer Gesprächspartner: Speziell entwickelt für emotionale 
+                        Unterstützung und mentale Gesundheit - immer da, wenn Sie jemanden brauchen.
+                    </p>
+                </div>
+                
+                <div style="text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: var(--shadow);">
+                    <img src="https://i.ibb.co/Hf2GbNWt/foto.jpg" alt="ORA" style="max-width: 100%; height: 250px; object-fit: contain; margin-bottom: 20px;">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">ORA</h3>
+                    <p style="font-size: 1.05em; line-height: 1.6;">
+                        Die kompakte KI für Zuhause: Starke Sprachinteraktion für Bildung, 
+                        Unterhaltung und Haushaltsorganisation - immer bereit zu helfen.
+                    </p>
+                </div>
+                
+                <div style="text-align: center; background: linear-gradient(135deg, white 0%, #fff9e6 100%); padding: 30px; border-radius: 20px; box-shadow: 0 6px 20px rgba(244, 164, 96, 0.3); border: 2px solid var(--secondary);">
+                    <img src="https://i.ibb.co/WvNyKKWz/foto-3.jpg" alt="Alio Premium" style="max-width: 100%; height: 250px; object-fit: contain; margin-bottom: 20px;">
+                    <h3 style="color: var(--secondary); margin-bottom: 15px;">⭐ Alio Mobility</h3>
+                    <p style="font-size: 1.05em; line-height: 1.6;">
+                        <strong>Die Revolution der Mobilität!</strong> Als einziger Roboter weltweit kann er mit Ihnen 
+                        gemeinsam Treppen steigen. Sicherheit, Freiheit und Unabhängigkeit in einem innovativen Design.
+                    </p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 60px; text-align: center;">
+                <h3 style="color: var(--primary); margin-bottom: 30px; font-size: 2em;">
+                    Warum Alio die richtige Wahl ist
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;">
+                    <div style="padding: 20px;">
+                        <div style="font-size: 3em; margin-bottom: 15px;">🏆</div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Deutsche Qualität</h4>
+                        <p>Entwickelt und produziert in Deutschland mit höchsten Qualitätsstandards</p>
+                    </div>
+                    <div style="padding: 20px;">
+                        <div style="font-size: 3em; margin-bottom: 15px;">❤️</div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Mit Herz entwickelt</h4>
+                        <p>Jedes Detail wurde gemeinsam mit Senioren für Senioren gestaltet</p>
+                    </div>
+                    <div style="padding: 20px;">
+                        <div style="font-size: 3em; margin-bottom: 15px;">🛡️</div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Sicher & Vertrauenswürdig</h4>
+                        <p>Höchste Datenschutzstandards und transparente Ethik-Richtlinien</p>
+                    </div>
+                    <div style="padding: 20px;">
+                        <div style="font-size: 3em; margin-bottom: 15px;">🌟</div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Einzigartige Innovation</h4>
+                        <p>Weltweit erster Mobilitätsroboter mit Treppensteig-Technologie</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Creativity Methods Section -->
+    <section id="kreativitaet" style="padding: 80px 20px; max-width: 1200px; margin: 0 auto;">
+        <h2 class="section-title">Kreativitätstechniken im Einsatz</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1em;">
+            Durch drei innovative Kreativitätstechniken haben wir unkonventionelle Lösungen entwickelt, 
+            die Senior*innen spielerisch zur Interaktion mit Robotern motivieren.
+        </p>
+        
+    <!-- Creativity Methods Section -->
+    <section style="padding: 80px 20px; max-width: 1200px; margin: 0 auto;">
+        <h2 class="section-title">Kreativitätstechniken im Einsatz</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 50px; font-size: 1.1em;">
+            Vor dem Hintergrund der identifizierten Herausforderungen wurden drei Kreativitätstechniken angewandt, 
+            um innovative, kreative und unkonventionelle Ideen zu entwickeln, wie man Seniorinnen und Senioren in 
+            verschiedenen Lebens- und Gesundheitslagen (zu Hause oder in Pflegeeinrichtungen) dazu bringt, gerne 
+            mit einem sozialen Assistenzroboter zu interagieren und dessen Hilfe anzunehmen.
+        </p>
+        
+        <div class="creativity-method fade-in">
+            <span class="method-number">1</span>
+            <h3 style="color: var(--primary); font-size: 1.8em; margin-bottom: 20px;">Kopfstandtechnik (Problemumkehr)</h3>
+            <p style="margin-bottom: 20px; font-size: 1.1em;">
+                Die Kopfstandtechnik dreht die ursprüngliche Frage um, um neue Perspektiven zu gewinnen. Anstatt zu fragen 
+                „Wie bringen wir ältere Menschen dazu, gern mit dem Roboter zu interagieren?", formuliert man das Gegenteil: 
+                „Wie könnten wir erreichen, dass ältere Menschen auf keinen Fall mit einem sozialen Roboter interagieren wollen?" 
+                Durch diese provokative Umkehrung lassen sich hemmende Faktoren identifizieren, die anschließend ins Positive 
+                verkehrt werden können.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px;">
+                <div style="background: #fff0f0; padding: 25px; border-radius: 10px; border-left: 5px solid #ff6b6b;">
+                    <h4 style="color: #c92a2a; margin-bottom: 15px;">❌ Inversion 1: Unattraktiver Roboter</h4>
+                    <p style="margin-bottom: 15px;">Der Roboter ist kalt, unpersönlich und ignorant. Er spricht in monotoner 
+                    Computerstimme, reagiert nicht auf die Gefühle der Person und bleibt distanziert.</p>
+                    <h4 style="color: #2f9e49; margin-bottom: 10px;">✅ Umkehr als Idee:</h4>
+                    <p>Der Roboter sollte warm, persönlich und empathisch auftreten. Konkret: freundliche Stimme mit 
+                    emotionaler Färbung, Namen verwenden, auf Stimmungen reagieren, morgens gut gelaunt begrüßen.</p>
+                </div>
+                <div style="background: #fff0f0; padding: 25px; border-radius: 10px; border-left: 5px solid #ff6b6b;">
+                    <h4 style="color: #c92a2a; margin-bottom: 15px;">❌ Inversion 2: Überforderung</h4>
+                    <p style="margin-bottom: 15px;">Die Bedienung ist kompliziert und frustrierend. Verwirrende Knöpfe, 
+                    unverständliche Befehle - Seniorinnen fühlen sich dumm und geben entnervt auf.</p>
+                    <h4 style="color: #2f9e49; margin-bottom: 10px;">✅ Umkehr als Idee:</h4>
+                    <p>Niedrigschwellige Interaktion und Benutzerfreundlichkeit. Intuitive Nutzung, Dialektwörter verstehen, 
+                    große Symbole, proaktive Hilfsangebote, Ja/Nein-Antworten per Kopfnicken. Erfolgserlebnisse schaffen!</p>
+                </div>
+                <div style="background: #fff0f0; padding: 25px; border-radius: 10px; border-left: 5px solid #ff6b6b;">
+                    <h4 style="color: #c92a2a; margin-bottom: 15px;">❌ Inversion 3: Angst und Misstrauen</h4>
+                    <p style="margin-bottom: 15px;">Der Roboter wirkt unheimlich oder bedrohlich. Fährt lautlos von hinten an, 
+                    sieht zu sehr nach „Roboter" aus (kaltes Metall, rote Augen). Datenschutzängste („Lauscht der mich aus?").</p>
+                    <h4 style="color: #2f9e49; margin-bottom: 10px;">✅ Umkehr als Idee:</h4>
+                    <p>Vertrauen und Sicherheit vermitteln. Freundliches Aussehen wie Haustier, akustische Ankündigung, 
+                    „Privatsphäre-Modus" mit sichtbar deaktivierten Kameras, sanfte Bewegungen. Roboter als sanftes, 
+                    vorhersehbares Wesen.</p>
+                </div>
+                <div style="background: #fff0f0; padding: 25px; border-radius: 10px; border-left: 5px solid #ff6b6b;">
+                    <h4 style="color: #c92a2a; margin-bottom: 15px;">❌ Inversion 4: Keine menschliche Note</h4>
+                    <p style="margin-bottom: 15px;">Der Roboter ersetzt menschliche Kontakte vollständig. Angehörige delegieren 
+                    alles und besuchen seltener; der Roboter „ignoriert" die Persönlichkeit des Menschen.</p>
+                    <h4 style="color: #2f9e49; margin-bottom: 10px;">✅ Umkehr als Idee:</h4>
+                    <p>Menschliche Kontakte ergänzen, nicht ersetzen. Videotelefonate erleichtern, Gruppenspiele moderieren, 
+                    Roboter-initiierter Stammtisch, persönliche Vorlieben kennen (Lieblingsmusik, Themen). Sozialinitiator 
+                    statt Isolator!</p>
+                </div>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.1em; background: #e3f2fd; padding: 20px; border-radius: 10px;">
+                <strong>Schlüsselanforderungen aus der Kopfstand-Analyse:</strong> Ein empathisches, einfaches, 
+                vertrauenswürdiges und sozial eingebettetes Robotersystem. Viele der daraus abgeleiteten Ideen 
+                fließen in die weiteren kreativen Lösungsansätze ein.
+            </p>
+        </div>
+
+        <div class="creativity-method fade-in">
+            <span class="method-number">2</span>
+            <h3 style="color: var(--primary); font-size: 1.8em; margin-bottom: 20px;">6-3-5 Methode (Kollektive Ideensammlung)</h3>
+            <p style="margin-bottom: 20px; font-size: 1.1em;">
+                Bei der 6-3-5 Methode handelt es sich um Brainwriting in Gruppen: 6 Personen notieren jeweils 3 Ideen 
+                und reichen ihr Blatt fünfmal weiter, sodass am Ende theoretisch 108 Ansätze entstehen. In unserem Fall 
+                wurden sechs fiktive Teilnehmende gebeten, kreative, unkonventionelle Einfälle zu notieren – von technischen 
+                Features über Einsatzszenarien bis zu pädagogischen Kniffen. Jede Runde baute auf den vorherigen Ideen auf, 
+                wodurch Ansätze weiterentwickelt oder kombiniert wurden.
+            </p>
+            <div style="overflow-x: auto; margin-bottom: 30px;">
+                <table style="width: 100%; border-collapse: collapse; background: var(--white); box-shadow: var(--shadow); border-radius: 10px;">
+                    <tr style="background: var(--primary); color: white;">
+                        <th style="padding: 15px; text-align: left;">Teilnehmer</th>
+                        <th style="padding: 15px; text-align: left;">Kernideen aus der Brainstorming-Runde</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 15px; vertical-align: top;"><strong>Teilnehmer 1</strong></td>
+                        <td style="padding: 15px;">
+                            <strong>1. Dialekt-Feature:</strong> Roboter spricht im Dialekt des Seniors und erzählt Witze aus seiner Jugend<br>
+                            <strong>2. Virtueller Stammtisch:</strong> Via Roboterkamera – Roboter verbindet Senioren mit Freunden per Video<br>
+                            <strong>3. Haustier-Modus:</strong> Roboter verhält sich wie Katze/Hund (schnurrt bei Streicheln, „läuft" einem nach)
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 15px; vertical-align: top;"><strong>Teilnehmer 2</strong></td>
+                        <td style="padding: 15px;">
+                            <strong>1. Musik-Therapie:</strong> Roboter singt alte Lieder mit dem Senior oder spielt Wunschmusik ab<br>
+                            <strong>2. Robotik-Bingo:</strong> Gerät moderiert Bingo-/Quiz-Abende im Heim, verteilt kleine Preise<br>
+                            <strong>3. Erinnerungsalbum:</strong> Zeigt alte Fotos/Videos und animiert zum Erzählen von Geschichten
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 15px; vertical-align: top;"><strong>Teilnehmer 3</strong></td>
+                        <td style="padding: 15px;">
+                            <strong>1. Tanzpartner:</strong> Roboter tanzt oder macht Gymnastikübungen mit projektierten Fußspuren am Boden<br>
+                            <strong>2. Persönlicher Butler:</strong> Serviert symbolisch den Tee/Kaffee mit freundlichem Spruch<br>
+                            <strong>3. Medikamenten-Spiel:</strong> Einnahme wird spielerisch belohnt („Gut gemacht! Hier ein virtueller Stern")
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 15px; vertical-align: top;"><strong>Teilnehmer 4</strong></td>
+                        <td style="padding: 15px;">
+                            <strong>1. Ehrenamtlicher Modus:</strong> Roboter lässt Senioren Aufgaben übernehmen („Kannst du mir das Rezept erklären?")<br>
+                            <strong>2. Avatar der Enkel:</strong> Enkelkinder können sich via Telepräsenz als Avatar im Roboter zuschalten<br>
+                            <strong>3. Gedächtnistrainer:</strong> Tägliches Rätsel angepasst ans Kenntnisniveau mit freundlichem Feedback
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 15px; vertical-align: top;"><strong>Teilnehmer 5</strong></td>
+                        <td style="padding: 15px;">
+                            <strong>1. Gruppen-Interaktion:</strong> Mehrere Roboter koordinieren Gruppenspiel oder singen im Chor<br>
+                            <strong>2. Belohnungssystem:</strong> Roboter lobt und belohnt Nutzung, druckt Zertifikat „Technik-Champion 80+"<br>
+                            <strong>3. Roboterwerkstatt:</strong> Senior können dem Roboter „helfen", ihn schmücken oder neue Kleidung anziehen
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; vertical-align: top;"><strong>Teilnehmer 6</strong></td>
+                        <td style="padding: 15px;">
+                            <strong>1. Sturzbegleiter:</strong> Roboter als Sicherheitsbegleitung beim Gehen, fährt mit Rollator und unterhält<br>
+                            <strong>2. Gesprächspartner:</strong> Echtzeit-Feedback („Das hört sich schwer an, möchten Sie mehr darüber sprechen?")<br>
+                            <strong>3. Geschichtengenerator:</strong> Roboter erzählt Geschichten und fragt nach eigenen Erinnerungen
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="background: #f0f8ff; padding: 25px; border-radius: 10px;">
+                <h4 style="color: var(--primary); margin-bottom: 15px;">Schwerpunkte aus der Brainwriting-Sitzung:</h4>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    Viele Ideen griffen die zuvor genannten Herausforderungen auf und suchten nach spielerischen, sozialen 
+                    oder emotionalen Lösungen. Es kristallisierten sich Kategorien heraus:
+                </p>
+                <ul style="font-size: 1.1em; line-height: 1.8; margin-top: 15px;">
+                    <li><strong>„Roboter als Spiel- und Unterhaltungsgefährte"</strong></li>
+                    <li><strong>„Roboter als soziales Bindeglied"</strong></li>
+                    <li><strong>„Personalisierung & Maßschneiderung"</strong></li>
+                    <li><strong>„Integration in den Alltag"</strong></li>
+                </ul>
+                <p style="font-size: 1.1em; line-height: 1.8; margin-top: 15px;">
+                    Auffällig ist, dass viele Ideen darauf abzielen, Bekanntes aus dem Leben der Seniorinnen und Senioren 
+                    aufzugreifen und in die Roboterinteraktion zu integrieren – sei es Musik aus ihrer Ära, Dialekte, 
+                    Haustiere oder Lieblingsspiele. Dies entspricht dem Grundgedanken der Personalisierung: Ein Roboter, 
+                    der die Persönlichkeit, Vorlieben und Lebensgeschichte der Nutzerinnen und Nutzer reflektiert, wird 
+                    eher als angenehmer Gefährte angesehen.
+                </p>
+            </div>
+        </div>
+
+        <div class="creativity-method fade-in">
+            <span class="method-number">3</span>
+            <h3 style="color: var(--primary); font-size: 1.8em; margin-bottom: 20px;">Reizworttechnik (Zufallsimpulse)</h3>
+            <p style="margin-bottom: 20px; font-size: 1.1em;">
+                Die Reizworttechnik nutzt zufällig ausgewählte Wörter, um Denkpfade aufzubrechen und neue Assoziationen 
+                zu wecken. Wir haben aus einem Wörterbuch und durch Brainstorming einige Begriffe gezogen, die auf den 
+                ersten Blick nichts mit Robotik und Senioren zu tun haben – und diese dann als kreative Sprungbretter 
+                genutzt. Zu jedem Reizwort haben wir gebrainstormt, welche Ideen oder Analogien sich ergeben könnten, 
+                um ältere Menschen spielerisch zur Interaktion mit einem Roboter zu motivieren.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-bottom: 30px;">
+                <div style="background: #fff3e0; padding: 25px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <div style="font-size: 3em; text-align: center; margin-bottom: 15px;">🌱</div>
+                    <h4 style="color: var(--primary); text-align: center; margin-bottom: 15px;">Garten</h4>
+                    <p style="font-size: 1.05em; line-height: 1.6;">
+                        <strong>Idee: „Garten-Modus" für den Roboter.</strong> Viele Senioren haben eine Verbindung zur Natur. 
+                        Der Roboter könnte als Gartenassistent auftreten: erinnert ans Blumengießen, fährt mit ins Beet und 
+                        misst Bodenfeuchtigkeit oder erkennt, wann das Gemüse reif ist. Er könnte Gartengeräte bringen oder 
+                        sogar Vogelgezwitscher abspielen. Diese Naturverbundenheit schafft Freude und der Roboter wird als 
+                        nützlicher Helfer im geliebten Hobby erlebt.
+                    </p>
+                </div>
+                <div style="background: #e3f2fd; padding: 25px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <div style="font-size: 3em; text-align: center; margin-bottom: 15px;">🎵</div>
+                    <h4 style="color: var(--primary); text-align: center; margin-bottom: 15px;">Musikbox</h4>
+                    <p style="font-size: 1.05em; line-height: 1.6;">
+                        <strong>Idee: Jukebox der Erinnerungen.</strong> Der Roboter fungiert wie ein alter Plattenspieler, 
+                        aber mit Interaktion: Der Senior nennt einen Lieblingssong aus seiner Jugend, der Roboter findet 
+                        ihn und erzählt vielleicht noch eine Anekdote dazu. Oder der Roboter singt selbst ein Lied vor 
+                        (vielleicht etwas schief, aber charmant) – gemeinsames Singen fördert nachweislich Stimmung und 
+                        Gedächtnis. So wird der Roboter zum musikalischen Gefährten.
+                    </p>
+                </div>
+                <div style="background: #f3e5f5; padding: 25px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <div style="font-size: 3em; text-align: center; margin-bottom: 15px;">🐾</div>
+                    <h4 style="color: var(--primary); text-align: center; margin-bottom: 15px;">Haustier</h4>
+                    <p style="font-size: 1.05em; line-height: 1.6;">
+                        <strong>Idee: Therapiebegleiter.</strong> Der Roboter greift Elemente eines Haustiers auf: Er reagiert 
+                        auf Streicheln (z.B. durch ein Schnurr-Geräusch oder freudiges Blinken). Er kann „Gesellschaft leisten" 
+                        – etwa neben dem Sessel „sitzend" und leise vor sich hin „atmend". Der Roboter könnte den Senior „rufen", 
+                        weil er „Auslauf" braucht – sprich: einen Spaziergang vorschlagen. Das Konzept nutzt die emotionale 
+                        Bindung zu Tieren.
+                    </p>
+                </div>
+                <div style="background: #e8f5e9; padding: 25px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <div style="font-size: 3em; text-align: center; margin-bottom: 15px;">🎭</div>
+                    <h4 style="color: var(--primary); text-align: center; margin-bottom: 15px;">Theater</h4>
+                    <p style="font-size: 1.05em; line-height: 1.6;">
+                        <strong>Idee: Roboter als Animateur.</strong> Seniorinnen und Roboter führen zusammen kleine 
+                        Theaterstücke auf. Der Roboter übernimmt eine lustige Rolle (mit kleinem Hut) und der Senior 
+                        eine andere; gemeinsam spielen sie bekannte Sketche nach. Alternativ erzählt der Roboter 
+                        Geschichten mit verteilten Rollen. Dieses Theaterkonzept fördert Kommunikation und macht den 
+                        Roboter zur Quelle von Spaß und Lachen.
+                    </p>
+                </div>
+                <div style="background: #fce4ec; padding: 25px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <div style="font-size: 3em; text-align: center; margin-bottom: 15px;">✈️</div>
+                    <h4 style="color: var(--primary); text-align: center; margin-bottom: 15px;">Reise</h4>
+                    <p style="font-size: 1.05em; line-height: 1.6;">
+                        <strong>Idee: „Roboter-Reiseleiter".</strong> Der Roboter schlägt regelmäßig virtuelle Reiseziele 
+                        vor: „Heute nehme ich dich mit nach Italien!" Dann zeigt er Bilder und Videos, erzählt Anekdoten 
+                        und motiviert den Senior, eigene Erinnerungen zu erzählen. Diese Mischung aus Animation und 
+                        Erinnerung schafft emotionale Tiefe. Reisebingo oder landestypische Musik machen die Sinne an. 
+                        Der Roboter wird zum Tor zur Welt.
+                    </p>
+                </div>
+                <div style="background: #e0f2f1; padding: 25px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <div style="font-size: 3em; text-align: center; margin-bottom: 15px;">🔧</div>
+                    <h4 style="color: var(--primary); text-align: center; margin-bottom: 15px;">Werkstatt</h4>
+                    <p style="font-size: 1.05em; line-height: 1.6;">
+                        <strong>Idee: Mitmach-Roboter.</strong> Ähnlich wie in einer Werkstatt kann der Roboter kleine 
+                        Anpassungsaufgaben geben: „Kannst du mir helfen, meine Jacke anzuziehen?" Der Senior wird aktiv 
+                        einbezogen, etwa durch austauschbare Accessoires. Sogar einfache Programmierung ist denkbar: 
+                        „Wenn du diesen Knopf draufsetzt, singe ich ein Lied!" Durch diesen Werkstatt-Ansatz verwandelt 
+                        sich der passive Nutzer in einen aktiven Gestalter.
+                    </p>
+                </div>
+            </div>
+            <div style="background: #e3f2fd; padding: 25px; border-radius: 10px;">
+                <h4 style="color: var(--primary); margin-bottom: 15px;">Erkenntnisse aus der Reizworttechnik:</h4>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    Diese Reizwort-Ideen liefern frische Blickwinkel. Sie zeigen, dass ein sozialer Roboter weit mehr sein kann 
+                    als ein „sprechender Kasten" – nämlich Spielkamerad, Haustier, Schüler, Entertainer oder Reisebegleiter. 
+                    Solche unkonventionellen Rollen können die Neugier der Seniorinnen und Senioren wecken und die Interaktion 
+                    lustvoll gestalten. Kombiniert man mehrere Ansätze (z. B. Haustier-Modus und Reiseleiter), entsteht ein 
+                    facettenreicher Nutzen. Wichtig ist aber stets, die Balance zu halten: Der Roboter darf nicht überfordern, 
+                    sondern sollte gezielt jene Reize bieten, die zur jeweiligen Person passen.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Foundation Section -->
+    <section id="forschung" class="research" style="background: var(--light-bg); padding: 80px 20px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title">Wissenschaftliche Grundlagen</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1em;">
+                Unsere Konzepte basieren auf aktueller Forschung und bewährten Modellen aus der internationalen Praxis.
+            </p>
+            <div class="research-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div class="research-card fade-in">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Akzeptanzfaktoren nach Almere-Modell</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;">📊 <strong>Wahrgenommene Nützlichkeit</strong> - Klarer Mehrwert erkennbar</li>
+                        <li style="margin-bottom: 10px;">😊 <strong>Freude (Enjoyment)</strong> - Spaß bei der Nutzung</li>
+                        <li style="margin-bottom: 10px;">🤝 <strong>Vertrauenswürdigkeit</strong> - Verlässlicher Partner</li>
+                    </ul>
+                </div>
+                <div class="research-card fade-in">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Erfolgreiche Beispiele weltweit</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;">🇯🇵 <strong>Japan: PARO</strong> - 5.000+ Adoptionen weltweit</li>
+                        <li style="margin-bottom: 10px;">🇩🇰 <strong>Dänemark:</strong> 400+ Seniorenheime nutzen Roboter</li>
+                        <li style="margin-bottom: 10px;">🇰🇷 <strong>Südkorea:</strong> 10.000+ Hyodol-Roboter verteilt</li>
+                    </ul>
+                </div>
+                <div class="research-card fade-in">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Design-Prinzipien</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;">🐾 <strong>Tierähnliche Formen</strong> bevorzugt</li>
+                        <li style="margin-bottom: 10px;">📏 <strong>60-70cm Größe</strong> - nicht bedrohlich</li>
+                        <li style="margin-bottom: 10px;">💬 <strong>Multimodale Interaktion</strong> für alle Sinne</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <blockquote style="font-style: italic; font-size: 1.2em; color: var(--primary); max-width: 800px; margin: 0 auto;">
+                    "In Workshops reagierten Senior*innen teils äußerst aufgeschlossen auf einen freundlich gestalteten Roboter 
+                    und entwickelten fast fürsorgliche Gefühle - eine Teilnehmerin scherzte, sie würde dem Roboter sofort ein Jäckchen stricken."
+                </blockquote>
+                <p style="margin-top: 20px; color: #666;">- Aus aktuellen Forschungsergebnissen</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Plan -->
+    <section class="implementation" id="implementation">
+        <h2 class="section-title">Unser Weg zum Erfolg</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 30px; font-size: 1.2em; font-weight: bold;">
+            Strukturierter, nutzerzentrierter Implementierungsplan
+        </p>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 50px; font-size: 1.1em;">
+            Basierend auf wissenschaftlichen Erkenntnissen und kreativen Lösungsansätzen folgen wir einem 
+            vierphasigen Implementierungsplan. Jede Phase baut auf den Erkenntnissen der vorherigen auf, 
+            wobei kontinuierliches Feedback von Seniorinnen und Senioren, Pflegepersonal und Angehörigen 
+            den Entwicklungsprozess leitet.
+        </p>
+        <div class="phase-container">
+            <div class="phase-box fade-in">
+                <span class="phase-number">1</span>
+                <h3 class="phase-title">Vorbereitung & Prototypentwicklung</h3>
+                <p><strong>Monate 1-3: Grundlagen schaffen</strong></p>
+                <p style="margin: 20px 0; font-size: 1.05em; line-height: 1.6;">
+                    In dieser Phase legen wir den Grundstein für eine erfolgreiche Roboter-Einführung. Wir beginnen 
+                    mit Wizard-of-Oz-Tests, bei denen Menschen die Roboterfunktionen simulieren, um Interaktionsmuster 
+                    zu verstehen.
+                </p>
+                <ul style="text-align: left; list-style: none;">
+                    <li>✓ Wizard-of-Oz Prototypentwicklung mit 20 Testpersonen</li>
+                    <li>✓ Rollenspiele mit Seniorinnen und Senioren</li>
+                    <li>✓ Modulare Attrappen testen (Plüschtier-Prototypen)</li>
+                    <li>✓ Ethische Richtlinien mit Ethikkommission etablieren</li>
+                    <li>✓ Partnerschaften mit 10 Kirchengemeinden aufbauen</li>
+                    <li>✓ Erste Gespräche mit Krankenkassen führen</li>
+                </ul>
+            </div>
+            <div class="phase-box fade-in">
+                <span class="phase-number">2</span>
+                <h3 class="phase-title">Pilotprogramm</h3>
+                <p><strong>Monate 4-6: Erste Praxistests</strong></p>
+                <p style="margin: 20px 0; font-size: 1.05em; line-height: 1.6;">
+                    Mit 100 Test-Robotern starten wir in ausgewählten Einrichtungen. Ko-Kreations-Workshops 
+                    ermöglichen es Senioren, aktiv an der Gestaltung mitzuwirken. Erste Robo-Cafés öffnen ihre Türen.
+                </p>
+                <ul style="text-align: left; list-style: none;">
+                    <li>✓ 100 Alio Buddy Prototypen in Piloteinrichtungen</li>
+                    <li>✓ 5 Robo-Cafés in verschiedenen Stadtteilen eröffnen</li>
+                    <li>✓ Ko-Kreations-Workshops durchführen</li>
+                    <li>✓ Erste Senioren-Trainer ausbilden (20 Personen)</li>
+                    <li>✓ Wöchentliche Feedback-Runden etablieren</li>
+                    <li>✓ Metriken zur Nutzungshäufigkeit erfassen</li>
+                </ul>
+            </div>
+            <div class="phase-box fade-in">
+                <span class="phase-number">3</span>
+                <h3 class="phase-title">Skalierung</h3>
+                <p><strong>Monate 7-12: Expansion und Optimierung</strong></p>
+                <p style="margin: 20px 0; font-size: 1.05em; line-height: 1.6;">
+                    Basierend auf den Piloterkenntnissen erweitern wir auf 1.000 aktive Roboter. Interdisziplinäre 
+                    Teams aus Technik, Pflege und Ethik optimieren kontinuierlich. Neue Features werden schrittweise 
+                    freigeschaltet.
+                </p>
+                <ul style="text-align: left; list-style: none;">
+                    <li>✓ 1.000 Roboter im aktiven Einsatz</li>
+                    <li>✓ 50 Robo-Café-Standorte bundesweit</li>
+                    <li>✓ 200 zertifizierte Senioren-Trainer</li>
+                    <li>✓ Alio Connect Features einführen</li>
+                    <li>✓ Krankenkassen-Kooperationen finalisieren</li>
+                    <li>✓ Erste wissenschaftliche Evaluation</li>
+                </ul>
+            </div>
+            <div class="phase-box fade-in">
+                <span class="phase-number">4</span>
+                <h3 class="phase-title">Marktführerschaft</h3>
+                <p><strong>Ab Monat 13: Nachhaltige Etablierung</strong></p>
+                <p style="margin: 20px 0; font-size: 1.05em; line-height: 1.6;">
+                    Mit über 10.000 Nutzern etablieren wir Alio als Marktführer für seniorengerechte Robotik. 
+                    Best Practices werden dokumentiert und geteilt. Die internationale Expansion beginnt mit 
+                    deutschsprachigen Nachbarländern.
+                </p>
+                <ul style="text-align: left; list-style: none;">
+                    <li>✓ 10.000+ aktive Nutzerinnen und Nutzer</li>
+                    <li>✓ Best Practice Handbuch veröffentlichen</li>
+                    <li>✓ Ethik-by-Design-Zertifizierung erhalten</li>
+                    <li>✓ Alio Life Premium-Services launchen</li>
+                    <li>✓ Expansion nach Österreich und Schweiz</li>
+                    <li>✓ Forschungskooperationen mit Universitäten</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="margin-top: 60px; background: #f0f8ff; padding: 40px; border-radius: 15px;">
+            <h3 style="color: var(--primary); text-align: center; margin-bottom: 30px;">
+                Begleitende Maßnahmen über alle Phasen
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 15px;">📊 Kontinuierliche Evaluation</h4>
+                    <p>Metriken und Beobachtung: Interaktionsdauer, Nutzungshäufigkeit, emotionale Reaktionen, 
+                    Feedback von Pflegepersonal. Kurze Interviews in einfacher Sprache liefern qualitative Daten.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 15px;">🤝 Interdisziplinäre Zusammenarbeit</h4>
+                    <p>Teams aus Robotik-Ingenieurinnen, Gerontologen, Ethikerinnen und Designern arbeiten 
+                    gemeinsam an der kontinuierlichen Verbesserung und Anpassung der Roboter.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 15px;">📚 Wissenstransfer</h4>
+                    <p>Regelmäßige Publikation von Forschungsergebnissen, Teilnahme an Fachkonferenzen und 
+                    Austausch mit anderen Projekten im Bereich sozialer Robotik für Senioren.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prototyping Section -->
+    <section style="background: var(--light-bg); padding: 80px 20px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title">Empfehlungen für Prototypentwicklung und Umsetzung</h2>
+            <p style="text-align: center; max-width: 900px; margin: 0 auto 50px; font-size: 1.1em;">
+                Bei der Umsetzung der Ideen ist es sinnvoll, frühzeitig kostengünstige Prototypen und Tests mit der 
+                Zielgruppe durchzuführen, um Feedback zu erhalten. Gerade im Kontext Senioren und soziale Robotik 
+                bietet sich ein schrittweises, partizipatives Vorgehen an.
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px;">
+                <div style="background: var(--white); padding: 30px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">🎭 Wizard-of-Oz Prototypentwicklung</h3>
+                    <p style="font-size: 1.05em; line-height: 1.7;">
+                        Bevor ein echter Roboter alle Funktionen beherrscht, kann man einen Menschen „hinter den Kulissen" 
+                        die Rolle des Roboters übernehmen lassen. Zum Beispiel ein Tablet auf einem kleinen Wagen als 
+                        „Roboterkopf": Eine Mitarbeiterin spricht durch den Lautsprecher des Tablets mit verstellter Stimme. 
+                        Seniorinnen und Senioren können so bereits mit einem scheinbar autonomen Gerät interagieren. Dies 
+                        erlaubt frühe Tests etwa zu Sprachverständnis und Reaktionen auf Humor oder Empathie, ohne volle 
+                        KI implementieren zu müssen.
+                    </p>
+                </div>
+                
+                <div style="background: var(--white); padding: 30px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">🔄 Rollenspiele mit Senioren</h3>
+                    <p style="font-size: 1.05em; line-height: 1.7;">
+                        Man kann Workshops organisieren, in denen Seniorinnen und Senioren selbst den Roboter mimen und 
+                        andere den Nutzer spielen – und umgekehrt. Durch diesen Perspektivwechsel erkennt man, welche 
+                        Verhaltensweisen angenehm oder störend sind. Das Feedback („Das fand ich lustig" oder „Da hätte 
+                        ich mich erschreckt") fließt direkt in die Feinjustierung ein. Solche Ko-Kreations-Ansätze 
+                        erhöhen zudem die Identifikation der älteren Menschen mit der Lösung.
+                    </p>
+                </div>
+                
+                <div style="background: var(--white); padding: 30px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">🧩 Modulare Attrappen</h3>
+                    <p style="font-size: 1.05em; line-height: 1.7;">
+                        Einige Ideen (z. B. Haustier-Modus, Tanzpartner) lassen sich mit einfachen Mitteln ausprobieren. 
+                        Für den Haustier-Modus könnte man ein Plüschtier mit Lautsprecher verwenden, das auf Berührung 
+                        Geräusche macht. Man gibt es einem demenziell veränderten Bewohner und beobachtet die Reaktion – 
+                        ähnlich wie bei PARO-Studien, die zeigen, dass so etwas beruhigend wirkt.
+                    </p>
+                </div>
+                
+                <div style="background: var(--white); padding: 30px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">📚 Interaktive Geschichten am Papier</h3>
+                    <p style="font-size: 1.05em; line-height: 1.7;">
+                        Bevor man komplexe Storytelling-Software entwickelt, kann man analoge Methoden nutzen. Zum Beispiel 
+                        einen Geschichtengenerator auf Karteikarten: Der Roboter (hier durch einen Moderator vertreten) 
+                        „erzählt" eine Geschichte, indem er Karten hochhält, und der Senior reagiert darauf. So kann man 
+                        günstig testen, ob ein Theater/Sketch mit Robotern wirklich Lachen hervorruft.
+                    </p>
+                </div>
+                
+                <div style="background: var(--white); padding: 30px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">👨‍👩‍👧‍👦 Einbindung des Umfelds</h3>
+                    <p style="font-size: 1.05em; line-height: 1.7;">
+                        Zum Niedrigschwelligen-Test gehört auch, das Umfeld mit einzubeziehen. Man könnte Pflegerinnen 
+                        einen Tag lang einen Roboter auf Telepräsenz steuern lassen. Oder Angehörige bekommen einen 
+                        „virtuellen Buddy" auf dem Tablet, um mit ihren Eltern zu interagieren. Deren Erfahrungen helfen, 
+                        das Konzept in der Praxis zu schärfen.
+                    </p>
+                </div>
+                
+                <div style="background: var(--white); padding: 30px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">📈 Schrittweise Funktionseinführung</h3>
+                    <p style="font-size: 1.05em; line-height: 1.7;">
+                        Für das tatsächliche Deployment empfiehlt sich, den Roboter schrittweise einzuführen: Zunächst 
+                        agiert der Roboter nur als „stumme" Präsenz im Raum. Dann aktiviert man eine Basisfunktion wie 
+                        das Spielen von Musik auf Zuruf. Nach und nach werden weitere Features freigeschaltet, abhängig 
+                        davon, wie die Personen reagieren. Durch diese phasenweise Steigerung kann man kontinuierlich 
+                        Rückmeldungen einholen.
+                    </p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 50px; padding: 30px; background: #fff0f0; border-radius: 15px;">
+                <h3 style="color: #c92a2a; margin-bottom: 20px;">⚠️ Wichtige ethische Richtlinien</h3>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    Abschließend ist zu empfehlen, sich an bestehenden Best Practices der Forschung zu orientieren. 
+                    Projekte wie Lio, Pepper-Studien oder Buddy zeigen, dass Interdisziplinarität wichtig ist: 
+                    Robotik-Ingenieurinnen und -Ingenieure, Gerontologinnen und Gerontologen, Ethikerinnen und Ethiker 
+                    sowie Designerinnen und Designer sollten gemeinsam den Prototyp evaluieren. Ebenso sollten ethische 
+                    Richtlinien für Tests eingehalten werden (insbesondere bei vulnerablen Gruppen wie Demenzkranken: 
+                    Freiwilligkeit, Abbruchmöglichkeit, kein Vormachen falscher Tatsachen – der Roboter sollte nicht 
+                    als mehr dargestellt werden, als er ist).
+                </p>
+            </div>
+        </div>
+    </section>
+    <section id="results">
+        <h2 class="section-title">Erwartete Ergebnisse</h2>
+        <div class="results-grid">
+            <div class="result-card fade-in">
+                <span class="result-number">95%</span>
+                <p>Zufriedenheitsrate</p>
+            </div>
+            <div class="result-card fade-in">
+                <span class="result-number">50%</span>
+                <p>Weiterempfehlungsrate</p>
+            </div>
+            <div class="result-card fade-in">
+                <span class="result-number">10k+</span>
+                <p>Nutzer in Jahr 2</p>
+            </div>
+            <div class="result-card fade-in">
+                <span class="result-number">20%</span>
+                <p>Marktanteil Ziel</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Conclusion Section -->
+    <section style="background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%); padding: 80px 20px; margin-bottom: 50px;">
+        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+            <h2 style="font-size: 2.5em; color: var(--primary); margin-bottom: 30px;">
+                Gemeinsam für eine menschzentrierte Zukunft
+            </h2>
+            <p style="font-size: 1.3em; line-height: 1.8; margin-bottom: 30px;">
+                Insgesamt gilt: Früh und oft testen, mit echten Seniorinnen und Senioren – so kann man die wirklich 
+                funktionierenden Ansätze herausfiltern. Die in dieser Ausarbeitung entwickelten Ideen – von humorvoller 
+                Dialektansprache über Spielangebote bis zum Haustierersatz – sollten in kleinen Schritten validiert werden.
+            </p>
+            <blockquote style="font-style: italic; font-size: 1.4em; color: var(--primary); max-width: 800px; margin: 30px auto; padding: 30px; background: rgba(255,255,255,0.8); border-radius: 15px; box-shadow: var(--shadow);">
+                „Mit Kreativitätstechniken haben wir vielfältige Lösungen skizziert, die nun pragmatisch erprobt und 
+                weiterentwickelt werden können – sodass am Ende ein sozialer Roboter steht, der für Seniorinnen und 
+                Senioren vom ungewohnten Gerät zum gern gesehenen Helfer und Gefährten wird."
+            </blockquote>
+            <p style="font-size: 1.2em; line-height: 1.8;">
+                Wenngleich soziale Assistenzroboter für Ältere noch ein neues Feld sind, deutet vieles darauf hin, 
+                dass <strong>Nutzen und Spaß Hand in Hand gehen müssen</strong>, um Akzeptanz zu erreichen.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title" style="color: white;">Lassen Sie uns gemeinsam Brücken bauen</h2>
+        <p style="font-size: 1.2em; margin-bottom: 40px;">Interessiert an einer Partnerschaft oder möchten Sie mehr erfahren?</p>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="organization">Organisation (optional)</label>
+                <input type="text" id="organization" name="organization">
+            </div>
+            <div class="form-group">
+                <label for="message">Ihre Nachricht</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Nachricht senden</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#privacy">Datenschutz</a>
+            <a href="#imprint">Impressum</a>
+            <a href="#careers">Karriere</a>
+            <a href="#press">Presse</a>
+        </div>
+        <p>&copy; 2024 Alio Robotics. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Vielen Dank für Ihre Nachricht! Wir werden uns schnellstmöglich bei Ihnen melden.');
+            e.target.reset();
+        });
+
+        // Counter animation for results
+        const animateCounter = (element, target) => {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    clearInterval(timer);
+                    element.textContent = element.textContent.includes('%') ? target + '%' : 
+                                         element.textContent.includes('k') ? target + 'k+' : target;
+                } else {
+                    element.textContent = Math.floor(current) + (element.textContent.includes('%') ? '%' : '');
+                }
+            }, 20);
+        };
+
+        // Trigger counter animation when results section is visible
+        const resultNumbers = document.querySelectorAll('.result-number');
+        const resultsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.animated) {
+                    entry.target.animated = true;
+                    const value = parseInt(entry.target.textContent);
+                    animateCounter(entry.target, value);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        resultNumbers.forEach(num => resultsObserver.observe(num));
+    </script>
+</body>
+</html>
